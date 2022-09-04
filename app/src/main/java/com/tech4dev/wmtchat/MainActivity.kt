@@ -10,6 +10,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tech4dev.wmtchat.adapter.MainPageAdapter
+import com.tech4dev.wmtchat.model.BroadcastActivity
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
@@ -24,12 +26,12 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         viewPager.adapter = MainPageAdapter(supportFragmentManager, lifecycle)
 
-        TabLayoutMediator(tabLayout, viewPager){ tab, position ->
-            when(position){
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
                 0 -> tab.icon = getDrawable(R.drawable.ic_baseline_photo_camera_24)
-                1 -> tab.text ="Chat"
-                2 -> tab.text ="Status"
-                3 -> tab.text ="Calls"
+                1 -> tab.text = "Chat"
+                2 -> tab.text = "Status"
+                3 -> tab.text = "Calls"
             }
         }.attach()
 
@@ -42,24 +44,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.app_bar_search -> {
                 Toast.makeText(this, "Search click", Toast.LENGTH_LONG).show()
                 return true
             }
-            R.id.new_group ->{
+            R.id.new_group -> {
                 goToNewGroupActivity()
                 return true
             }
-            R.id.new_broadcast ->{
-                Toast.makeText(this, "New Broadcast click", Toast.LENGTH_LONG).show()
+            R.id.new_broadcast -> {
+                goToBroadcastActivity()
                 return true
             }
             R.id.linked_devices -> {
                 Toast.makeText(this, "Linked Devices click", Toast.LENGTH_LONG).show()
                 return true
             }
-            R.id.settings ->{
+            R.id.settings -> {
                 Toast.makeText(this, "Settings click", Toast.LENGTH_LONG).show()
                 return true
             }
@@ -69,8 +71,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToNewGroupActivity(){
+    private fun goToNewGroupActivity() {
         val i = Intent(this, NewGroupActivity::class.java)
         startActivity(i)
+    }
+    private fun goToBroadcastActivity() {
+        val a = Intent(this, BroadcastActivity::class.java)
+        startActivity(a)
     }
 }
